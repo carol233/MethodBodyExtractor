@@ -1,0 +1,49 @@
+Line,Body Stmt
+1,$r0 := @parameter0: android.content.Context
+2,$r2 := @parameter1: java.io.File
+3,$r3 := @parameter2: java.lang.String
+4,$i0 := @parameter3: int
+5,if $r0 == null goto return
+6,if $r2 == null goto return
+7,$r4 = virtualinvoke $r2.<java.io.File: java.lang.String getAbsolutePath()>()
+8,$r1 = new android.content.ContentValues
+9,specialinvoke $r1.<android.content.ContentValues: void <init>()>()
+10,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.String)>(""_data"", $r4)"
+11,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.String)>(""title"", $r3)"
+12,$l1 = virtualinvoke $r2.<java.io.File: long length()>()
+13,$r5 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l1)
+14,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.Long)>(""_size"", $r5)"
+15,$r6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(2131558465)
+16,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.Integer)>(""artist"", $r6)"
+17,$z0 = 1
+18,if $i0 != 1 goto $z1 = 0
+19,$z1 = 1
+20,goto [?= $r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z1)]
+21,$z1 = 0
+22,$r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z1)
+23,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.Boolean)>(""is_ringtone"", $r7)"
+24,if $i0 != 2 goto $z1 = 0
+25,$z1 = 1
+26,goto [?= $r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z1)]
+27,$z1 = 0
+28,$r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z1)
+29,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.Boolean)>(""is_notification"", $r7)"
+30,if $i0 != 4 goto $z0 = 0
+31,goto [?= $r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z0)]
+32,$z0 = 0
+33,$r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z0)
+34,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.Boolean)>(""is_alarm"", $r7)"
+35,$r7 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(0)
+36,"virtualinvoke $r1.<android.content.ContentValues: void put(java.lang.String,java.lang.Boolean)>(""is_music"", $r7)"
+37,$r8 = staticinvoke <android.provider.MediaStore$Audio$Media: android.net.Uri getContentUriForPath(java.lang.String)>($r4)
+38,$r9 = virtualinvoke $r0.<android.content.Context: android.content.ContentResolver getContentResolver()>()
+39,$r10 = new java.lang.StringBuilder
+40,"specialinvoke $r10.<java.lang.StringBuilder: void <init>(java.lang.String)>(""_data=\"""")"
+41,virtualinvoke $r10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r4)
+42,"virtualinvoke $r10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(""\"""")"
+43,$r3 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.String toString()>()
+44,"virtualinvoke $r9.<android.content.ContentResolver: int delete(android.net.Uri,java.lang.String,java.lang.String[])>($r8, $r3, null)"
+45,$r9 = virtualinvoke $r0.<android.content.Context: android.content.ContentResolver getContentResolver()>()
+46,"$r8 = virtualinvoke $r9.<android.content.ContentResolver: android.net.Uri insert(android.net.Uri,android.content.ContentValues)>($r8, $r1)"
+47,"staticinvoke <android.media.RingtoneManager: void setActualDefaultRingtoneUri(android.content.Context,int,android.net.Uri)>($r0, $i0, $r8)"
+48,return
